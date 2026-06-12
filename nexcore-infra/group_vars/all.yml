@@ -1,0 +1,24 @@
+---
+
+## Servers
+
+domain_name: "nexcore.local"
+servera_ip: "172.25.250.10"
+serverb_ip: "172.25.250.11"
+serverc_ip: "172.25.250.12"
+
+
+## MediaWiki
+
+wiki_fqdn: "wiki.nexcore.local"
+wiki_db: "wikidb"
+wiki_db_user: ""
+wiki_db_password: ""
+
+
+## MySQL
+
+
+
+
+
