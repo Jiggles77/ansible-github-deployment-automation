@@ -1,0 +1,31 @@
+---
+- name: Install Nginx, PHP-FPM, and PHP extensions
+  dnf:
+    name:
+      - nginx
+      - php-fpm
+      - php-mysqlnd
+      - php-gd
+      - php-xml
+      - php-intl
+      - php-mbstring
+    state: present
+
+- name: Ensure PHP-FPM service is started and enabled
+  service:
+    name: php-fpm
+    state: started
+    enabled: true
+
+- name: Ensure Nginx is started
+  service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Open port 80 in firewalld
+  ansible.posix.firewalld:
+    service: http
+    permanent: true
+    state: enabled
+    immediate: true

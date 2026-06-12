@@ -11,14 +11,7 @@ serverc_ip: "172.25.250.12"
 ## MediaWiki
 
 wiki_fqdn: "wiki.nexcore.local"
-wiki_db: "wikidb"
-wiki_db_user: ""
-wiki_db_password: ""
-
-
-## MySQL
-
-
-
-
-
+wiki_db_name: "media_wiki_db"
+wiki_db_user: "mediawiki"
+wiki_db_password: "Med1aW1k12027!"
+wiki_install_dir: "/var/www/mediawiki"

@@ -1,0 +1,13 @@
+---
+- name: Deploy MySQL Database
+  hosts: db
+  become: true
+  roles:
+    - database
+
+- name: Configure MediaWiki and NGINX
+  hosts: web
+  become: true
+  roles:
+    - web
+    - wiki

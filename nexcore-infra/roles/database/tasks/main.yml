@@ -1,11 +1,12 @@
 ---
-- name: Install MySQL Server and PyMySQL dependencies
+- name: Install MySQL Server and PyMySQL
   dnf:
     name:
       - mysql-server
+      - python3-PyMySQL
     state: present
 
-- name: Start and enable MySQL service
+- name: Enable MySQL service
   service:
     name: mysqld
     state: started
@@ -29,6 +30,5 @@
     name: "{{ wiki_db_user }}"
     password: "{{ wiki_db_password }}"
     priv: "{{ wiki_db_name }}.*:ALL"
-#    host: "servera.nexcore.local"
     state: present
     login_unix_socket: /var/lib/mysql/mysql.sock
