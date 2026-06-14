@@ -1,0 +1,28 @@
+---
+- name: Create deployment directory for WordPress
+  file:
+    path: /var/www/wordpress
+    state: directory
+    owner: nginx
+    group: nginx
+    mode: '0755'
+
+- name: Download and unpack WordPress packages
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: /var/www/wordpress
+    remote_src: true
+    extra_opts: [--strip-components=1]
+    creates: /var/www/wordpress/index.php
+    owner: nginx
+    group: nginx
+
+- name: Create Nginx configuration
+  template:
+    src: wordpress.nginx.conf.j2
+    dest: /etc/nginx/conf.d/wordpress.conf
+
+- name: Reload Nginx Server
+  service:
+    name: nginx
+    state: reloaded

@@ -5,9 +5,10 @@
   roles:
     - database
 
-- name: Configure MediaWiki and NGINX
+- name: Configure services
   hosts: web
   become: true
   roles:
     - web
     - wiki
+    - wordpress
