@@ -23,3 +23,13 @@ wp_db_name: "wordpressdb"
 wp_db_user: "wpuser"
 wp_db_password: "WordPre551999#"
 
+
+## NFS
+
+storage_mount_point: "/mnt/shared"
+storage_vg_name: "vg_data"
+storage_lv_name: "lv_shared"
+storage_lv_size: "10G"
+storage_dev_disk: "/dev/sdb"
+network_subnet: "172.25.250.9/24"
+
