@@ -32,4 +32,4 @@ storage_lv_name: "lv_shared"
 storage_lv_size: "1G"
 storage_dev_disk: "/dev/vdb"
 network_subnet: "172.25.250.11/24"
-
+dev_group_gid: "3000"
