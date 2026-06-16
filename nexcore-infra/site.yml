@@ -5,6 +5,12 @@
   roles:
     - database
 
+- name: Configure NFS
+  hosts: all_managed
+  become: true
+  roles:
+    - storage
+
 - name: Configure services
   hosts: web
   become: true
