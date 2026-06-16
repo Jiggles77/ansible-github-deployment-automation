@@ -1,0 +1,8 @@
+---
+- name: Import Storage Server configuration blocks
+  import_tasks: server.yml
+  when: inventory_hostname in groups['db']
+
+- name: Import Storage Client configuration blocks
+  import_tasks: client.yml
+  when: inventory_hostname in groups['web']

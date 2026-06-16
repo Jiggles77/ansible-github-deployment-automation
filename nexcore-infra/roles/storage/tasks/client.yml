@@ -1,0 +1,25 @@
+---
+- name: Install NFS utils
+  dnf:
+    name: nfs-utils
+    state: present
+
+- name: Make sure dev group exists on client
+  group:
+    name: dev
+    gid: "{{ dev_group_gid }}"
+    state: present
+
+- name: Create mount point on client
+  file:
+    path: "{{ storage_mount_point }}"
+    state: directory
+    mode: '2775'
+
+- name: Mount the shared directory from serverb via NFS
+  ansible.posix.mount:
+    path: "{{ storage_mount_point }}"
+    src: "{{ serverb_ip }}:{{storage_mount_point }}"
+    fstype: nfs
+    opts: rw,sync
+    state: mounted
