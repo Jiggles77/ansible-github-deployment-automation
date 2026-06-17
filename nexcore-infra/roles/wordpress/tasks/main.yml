@@ -21,8 +21,3 @@
   template:
     src: wordpress.nginx.conf.j2
     dest: /etc/nginx/conf.d/wordpress.conf
-
-- name: Reload Nginx Server
-  service:
-    name: nginx
-    state: reloaded

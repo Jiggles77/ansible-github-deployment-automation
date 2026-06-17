@@ -20,8 +20,4 @@
   template:
     src: wiki.nginx.conf.j2
     dest: /etc/nginx/conf.d/wiki.conf
-
-- name: Reload Nginx Server
-  service:
-    name: nginx
-    state: reloaded
+  notify: Reload Nginx Server

@@ -54,10 +54,7 @@
   template:
     src: exports.j2
     dest: /etc/exports
-
-- name: Reload NFS Exports Table
-  command: exportfs -ra
-  changed_when: true
+  notify: Reload NFS Exports Table
 
 - name: Start and enable NFS server
   service:

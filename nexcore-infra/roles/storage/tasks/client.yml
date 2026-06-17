@@ -16,10 +16,10 @@
     state: directory
     mode: '2775'
 
-- name: Mount the shared directory from serverb via NFS
+- name: Mount the shared directory from NFS server
   ansible.posix.mount:
     path: "{{ storage_mount_point }}"
-    src: "{{ serverb_ip }}:{{storage_mount_point }}"
+    src: "{{ nfs_server1_ip }}:{{storage_mount_point }}"
     fstype: nfs
     opts: rw,sync
     state: mounted
