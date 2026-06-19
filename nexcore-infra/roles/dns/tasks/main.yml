@@ -1,0 +1,7 @@
+---
+- name: Execute BIND Server installation tasks
+  import_tasks: server.yml
+  when: inventory_hostname in groups['dns_server']
+
+- name: Configure DNS on clients
+  import_tasks: clients.yml

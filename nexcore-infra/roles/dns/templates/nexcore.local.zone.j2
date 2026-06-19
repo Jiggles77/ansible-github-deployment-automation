@@ -1,0 +1,16 @@
+$TTL 1D
+@               IN SOA {{ dns_server_fqdn }}. {{ dns_admin_user }}.{{ domain_name }}. (
+                                        1       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+
+                IN	NS      {{ dns_server_fqdn }}.
+
+dns             IN      A       {{ dns_server_ip }}
+mail            IN      A       {{ mail_server_ip }}
+wiki            IN      A       {{ wiki_server_ip }}
+www             IN      A       {{ wordpress_server_ip }}
+
+@               IN      MX      50 {{ mail_server_fqdn }}.

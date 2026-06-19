@@ -1,9 +1,15 @@
 ---
 - name: Deploy MySQL Database
-  hosts: db
+  hosts: db_server
   become: true
   roles:
     - database
+
+- name: Configure BIND on DNS server and resolv.conf on clients
+  hosts: all_managed
+  become: true
+  roles:
+    - dns
 
 - name: Configure NFS
   hosts: all_managed
@@ -11,10 +17,16 @@
   roles:
     - storage
 
-- name: Configure services
-  hosts: web
+- name: Configure MediaWiki and Nginx
+  hosts: wiki_server
   become: true
   roles:
-    - web
     - wiki
-    - wordpress
+    - web
+
+- name: Configure Wordpress and Nginx
+  hosts: wp_server
+  become: true
+  roles:
+    - wiki
+    - web

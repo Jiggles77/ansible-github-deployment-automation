@@ -1,0 +1,4 @@
+zone "{{ domain_name }}" IN {
+	type master;
+	file "/var/named/zones/master/{{ domain_name }}";
+};
