@@ -1,0 +1,11 @@
+---
+- name: Generate unique OpenSSH keypairs for employees
+  openssh_keypair:
+    path: "{{ local_key_dir }}/{{ item.username }}_id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: false
+  loop: "{{ managed_users }}"
+  delegate_to: localhost
+  run_once: true

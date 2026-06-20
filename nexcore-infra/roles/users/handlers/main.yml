@@ -1,0 +1,5 @@
+---
+- name: Reload SSHD Daemon
+  ansible.builtin.service:
+    name: sshd
+    state: reloaded

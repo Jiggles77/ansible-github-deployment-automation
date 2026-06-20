@@ -1,0 +1,6 @@
+---
+- name: Generate users keypairs
+  import_tasks: keygen.yml
+
+- name: Configure users and keypairs
+  import_tasks: users.yml

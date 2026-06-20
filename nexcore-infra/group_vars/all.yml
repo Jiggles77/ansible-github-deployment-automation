@@ -1,5 +1,9 @@
 ---
 
+## Project
+
+project_directory: "/home/student/project-automation/nexcore-infra"
+
 ## Servers
 
 domain_name: "nexcore.local"
@@ -44,3 +48,21 @@ mail_server_ip: "{{ lookup('vars', groups['mail_server'][0] + '_ip') }}"
 mail_server_fqdn: "mail.nexcore.local"
 wiki_server_ip: "{{ lookup('vars', groups['wiki_server'][0] + '_ip') }}"
 wordpress_server_ip: "{{ lookup('vars', groups['wp_server'][0] + '_ip') }}"
+
+## Users
+
+local_key_dir: "{{ project_directory + '/roles/users/keypairs' }}"
+
+managed_users:
+  - username: "ops01"
+    groups: "ops"
+    sudo: true
+  - username: "dev01"
+    groups: "dev"
+    sudo: false
+  - username: "dev02"
+    groups: "dev"
+    sudo: false
+  - username: "mkt01"
+    groups: "marketing"
+    sudo: false

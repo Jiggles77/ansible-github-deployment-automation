@@ -1,0 +1,49 @@
+---
+- name: Ensure groups exist
+  group:
+    name: "{{ item.groups }}"
+    state: present
+  loop: "{{ managed_users }}"
+
+- name: Provision employee system user accounts
+  user:
+    name: "{{ item.username }}"
+    groups: "{{ item.groups }}"
+    append: true
+    shell: /bin/bash
+    state: present
+  loop: "{{ managed_users }}"
+
+- name: Deploy users public keys to authorized_keys
+  ansible.posix.authorized_key:
+    user: "{{ item.username }}"
+    state: present
+    key: "{{ lookup('file', local_key_dir + '/' + item.username + '_id_rsa.pub') }}"
+  loop: "{{ managed_users }}"
+
+- name: Configure passwordless sudo privileges for sudo users
+  copy:
+    dest: "/etc/sudoers.d/{{ item.username }}"
+    content: "{{ item.username }} ALL=(ALL) NOPASSWD: ALL"
+    owner: root
+    group: root
+    mode: '0440'
+  loop: "{{ managed_users }}"
+  when: item.sudo | bool
+
+- name: Disable SSH Password Authentication
+  copy:
+    dest: "/etc/ssh/sshd_config.d/disable_passwords.conf"
+    content: "PasswordAuthentication no"
+    owner: root
+    group: root
+    mode: '0440'
+
+- name: Enable SSH Pubkey Authentication
+  copy:
+    dest: "/etc/ssh/sshd_config.d/enable_pubkeys.conf"
+    content: "PubkeyAuthentication yes"
+    owner: root
+    group: root
+    mode: '0440'
+  notify: Reload SSHD Daemon

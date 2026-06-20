@@ -1,5 +1,5 @@
 options {
-        listen-on port 53 { {{ dns_server_ip }}; };
+        listen-on port 53 { localhost; {{ dns_server_ip }}; };
         listen-on-v6 port 53 { ::1; };
         directory       "/var/named";
         dump-file       "/var/named/data/cache_dump.db";
@@ -7,11 +7,14 @@ options {
         memstatistics-file "/var/named/data/named_mem_stats.txt";
         secroots-file   "/var/named/data/named.secroots";
         recursing-file  "/var/named/data/named.recursing";
-        allow-query     { {{ network_subnet }}; };
-
+        allow-query     { localhost; {{ network_subnet }}; };
         recursion yes;
+        forwarders {
+                172.25.250.220; 
+        };
+        forward first;
 
-        dnssec-validation yes;
+        dnssec-validation no;
 
         managed-keys-directory "/var/named/dynamic";
         geoip-directory "/usr/share/GeoIP";
@@ -19,7 +22,6 @@ options {
         pid-file "/run/named/named.pid";
         session-keyfile "/run/named/session.key";
 
-        /* https://fedoraproject.org/wiki/Changes/CryptoPolicy */
         include "/etc/crypto-policies/back-ends/bind.config";
 };
 
