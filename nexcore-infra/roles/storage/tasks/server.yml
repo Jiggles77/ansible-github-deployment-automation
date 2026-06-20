@@ -72,3 +72,12 @@
     - nfs
     - mountd
     - rpc-bind
+
+- name: Provision per user storage
+  file:
+    path: "/mnt/shared/users/{{ item.username }}"
+    state: directory
+    owner: "{{ item.username }}"
+    group: "{{ item.groups }}"
+    mode: '2700'
+  loop: "{{ managed_users }}"

@@ -1,0 +1,3 @@
+---
+- name: Configure Client Security Context
+  import_tasks: security.yml

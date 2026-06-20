@@ -1,5 +1,12 @@
 ---
 
+- name: Configure security
+  hosts: all_managed
+  become: true
+  roles:
+    - security
+  tags: configure_security
+
 - name: Configure users
   hosts: all_managed
   become: true
