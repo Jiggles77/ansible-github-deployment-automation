@@ -6,6 +6,18 @@
       - dovecot
     state: present
 
+- name: Start and Enable Dovecot
+  service:
+    name: dovecot
+    state: started
+    enabled: true
+
+- name: Start and Enable Postfix
+  service:
+    name: postfix
+    state: started
+    enabled: true
+
 - name: Deploy Postfix main.cf template
   template:
     src: main.cf.j2
@@ -47,15 +59,3 @@
     state: enabled
     immediate: true
   notify: Reload Firewall
-
-- name: Start and Enable Dovecot
-  service:
-    name: dovecot
-    state: started
-    enabled: true
-
-- name: Start and Enable Postfix
-  service:
-    name: postfix
-    state: started
-    enabled: true
