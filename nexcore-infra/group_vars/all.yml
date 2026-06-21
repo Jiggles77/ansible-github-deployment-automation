@@ -1,15 +1,25 @@
 ---
-
 ## Project
 
 project_directory: "/home/student/project-automation/nexcore-infra"
-
-## Servers
-
 domain_name: "nexcore.local"
-servera_ip: "172.25.250.10"
-serverb_ip: "172.25.250.11"
-serverc_ip: "172.25.250.12"
+network_subnet: "172.25.250.0/24"
+
+# DNS
+
+dns_server_fqdn: "dns.{{ domain_name }}"
+dns_server_ip: "{{ hostvars[groups['dns_server'][0]]['ansible_host'] }}"
+dns_admin_user: "admin"
+
+mail_server_fqdn: "mail.{{ domain_name }}"
+mail_server_ip: "{{ hostvars[groups['mail_server'][0]]['ansible_host'] }}"
+
+db_server_fqdn: "db.{{ domain_name }}"
+db_server_ip: "{{ hostvars[groups['db_server'][0]]['ansible_host'] }}"
+
+wiki_server_ip: "{{ hostvars[groups['wiki_server'][0]]['ansible_host'] }}"
+wordpress_server_ip: "{{ hostvars[groups['wp_server'][0]]['ansible_host'] }}"
+nfs_server1_ip: "{{ hostvars[groups['nfs_servers'][0]]['ansible_host'] }}"
 
 ## NFS
 
@@ -18,28 +28,11 @@ storage_vg_name: "vg_shared"
 storage_lv_name: "lv_shared"
 storage_lv_size: "1000M"
 storage_dev_disk: "/dev/vdb"
-network_subnet: "172.25.250.0/24"
 dev_group_gid: "3000"
-nfs_server1_ip: "{{ lookup('vars', groups['nfs_servers'][0] + '_ip') }}"
-
-## Mail and DNS
-
-dns_server_fqdn: "dns.nexcore.local"
-dns_server_ip: "{{ lookup('vars', groups['dns_server'][0] + '_ip') }}"
-dns_admin_user: "admin"
-
-mail_server_ip: "{{ lookup('vars', groups['mail_server'][0] + '_ip') }}"
-mail_server_fqdn: "mail.nexcore.local"
-
-wiki_server_ip: "{{ lookup('vars', groups['wiki_server'][0] + '_ip') }}"
-wordpress_server_ip: "{{ lookup('vars', groups['wp_server'][0] + '_ip') }}"
-
-db_server_fqdn: "db.nexcore.local"
-db_server_ip: "{{ lookup('vars', groups['db_server'][0] + '_ip') }}"
 
 ## Users
 
-local_key_dir: "{{ project_directory + '/roles/users/keypairs' }}"
+local_key_dir: "{{ project_directory }}/roles/users/keypairs"
 
 managed_users:
   - username: "ops01"
