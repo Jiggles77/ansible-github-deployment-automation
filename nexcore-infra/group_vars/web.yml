@@ -1,0 +1,9 @@
+## Virtual Hosts
+
+wiki_fqdn: "wiki.nexcore.local"
+wp_fqdn: "www.nexcore.local"
+
+## Install dirs
+
+wiki_install_dir: "/var/www/mediawiki"
+wp_install_dir: "/var/www/wordpress"

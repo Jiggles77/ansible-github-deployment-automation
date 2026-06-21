@@ -1,0 +1,10 @@
+## MediaWiki
+
+wiki_db_name: "media_wiki_db"
+wiki_db_user: "mediawiki"
+wiki_db_password: "Med1aW1k12027!"
+
+## Wordpress
+wp_db_name: "wordpressdb"
+wp_db_user: "wpuser"
+wp_db_password: "WordPre551999#"

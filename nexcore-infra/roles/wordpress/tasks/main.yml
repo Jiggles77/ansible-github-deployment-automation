@@ -1,7 +1,7 @@
 ---
 - name: Create deployment directory for WordPress
   file:
-    path: /var/www/wordpress
+    path: "{{ wp_install_dir }}"
     state: directory
     owner: nginx
     group: nginx
@@ -10,10 +10,10 @@
 - name: Download and unpack WordPress packages
   unarchive:
     src: https://wordpress.org/latest.tar.gz
-    dest: /var/www/wordpress
+    dest: "{{ wp_install_dir }}"
     remote_src: true
     extra_opts: [--strip-components=1]
-    creates: /var/www/wordpress/index.php
+    creates: "{{ wp_install_dir }}/index.php"
     owner: nginx
     group: nginx
 
@@ -21,3 +21,4 @@
   template:
     src: wordpress.nginx.conf.j2
     dest: /etc/nginx/conf.d/wordpress.conf
+  notify: Reload Nginx Server

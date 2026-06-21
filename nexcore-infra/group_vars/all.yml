@@ -11,23 +11,6 @@ servera_ip: "172.25.250.10"
 serverb_ip: "172.25.250.11"
 serverc_ip: "172.25.250.12"
 
-
-## MediaWiki
-
-wiki_fqdn: "wiki.nexcore.local"
-wiki_db_name: "media_wiki_db"
-wiki_db_user: "mediawiki"
-wiki_db_password: "Med1aW1k12027!"
-wiki_install_dir: "/var/www/mediawiki"
-
-## Wordpress
-
-wp_fqdn: "www.nexcore.local"
-wp_db_name: "wordpressdb"
-wp_db_user: "wpuser"
-wp_db_password: "WordPre551999#"
-
-
 ## NFS
 
 storage_mount_point: "/mnt/shared"
@@ -37,17 +20,22 @@ storage_lv_size: "1000M"
 storage_dev_disk: "/dev/vdb"
 network_subnet: "172.25.250.0/24"
 dev_group_gid: "3000"
-nfs_server1_ip: "172.25.250.11"
+nfs_server1_ip: "{{ lookup('vars', groups['nfs_servers'][0] + '_ip') }}"
 
 ## Mail and DNS
 
 dns_server_fqdn: "dns.nexcore.local"
 dns_server_ip: "{{ lookup('vars', groups['dns_server'][0] + '_ip') }}"
 dns_admin_user: "admin"
+
 mail_server_ip: "{{ lookup('vars', groups['mail_server'][0] + '_ip') }}"
 mail_server_fqdn: "mail.nexcore.local"
+
 wiki_server_ip: "{{ lookup('vars', groups['wiki_server'][0] + '_ip') }}"
 wordpress_server_ip: "{{ lookup('vars', groups['wp_server'][0] + '_ip') }}"
+
+db_server_fqdn: "db.nexcore.local"
+db_server_ip: "{{ lookup('vars', groups['db_server'][0] + '_ip') }}"
 
 ## Users
 

@@ -12,5 +12,6 @@ dns             IN      A       {{ dns_server_ip }}
 mail            IN      A       {{ mail_server_ip }}
 wiki            IN      A       {{ wiki_server_ip }}
 www             IN      A       {{ wordpress_server_ip }}
+db		IN	A	{{ db_server_ip }}
 
 @               IN      MX      50 {{ mail_server_fqdn }}.

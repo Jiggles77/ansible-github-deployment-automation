@@ -1,7 +1,7 @@
 ---
 - name: Create deployment directory
   file:
-    path: /var/www/mediawiki
+    path: "{{ wiki_install_dir }}"
     state: directory
     owner: nginx
     group: nginx
@@ -15,6 +15,11 @@
     creates: "{{ wiki_install_dir }}/index.php"
     owner: nginx
     group: nginx
+
+- name: Configure LocalSettings.php
+  template:
+    src: LocalSettings.php.j2
+    dest: "{{ wiki_install_dir }}/LocalSettings.php"
 
 - name: Create Nginx server configuration for MediaWiki
   template:

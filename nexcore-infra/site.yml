@@ -20,7 +20,10 @@
   roles:
     - database
   tags: deploy_mysql
-
+  vars_files:
+#    - group_vars/all.yml
+    - group_vars/db.yml
+    
 - name: Configure BIND on DNS server and resolv.conf on clients
   hosts: all_managed
   become: true
@@ -42,6 +45,9 @@
     - web
     - wiki
   tags: deploy_wiki
+  vars_files:
+#    - group_vars/all.yml
+    - group_vars/web.yml
 
 - name: Configure Wordpress and Nginx
   hosts: wp_server
@@ -50,3 +56,6 @@
     - web
     - wordpress
   tags: deploy_wp
+  vars_files:
+#    - group_vars/all.yml
+    - group_vars/web.yml

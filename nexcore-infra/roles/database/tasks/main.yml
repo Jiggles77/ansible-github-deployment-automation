@@ -19,6 +19,15 @@
     state: enabled
     immediate: true
 
+- name: Configure mysql to listen on subnet
+  template:
+    src: bind-address.j2
+    dest: /etc/my.cnf.d/bind.cnf
+    owner: root
+    group: mysql
+    mode: '0640'
+  notify: Restart MySQL
+
 - name: Create the dedicated MediaWiki database
   ansible.mysql.mysql_db:
     name: "{{ wiki_db_name }}"
@@ -31,6 +40,7 @@
     password: "{{ wiki_db_password }}"
     priv: "{{ wiki_db_name }}.*:ALL"
     state: present
+    host: "{{ wiki_server_ip }}"
     login_unix_socket: /var/lib/mysql/mysql.sock
 
 - name: Create the dedicated Wordpress database
@@ -45,4 +55,5 @@
     password: "{{ wp_db_password }}"
     priv: "{{ wp_db_name }}.*:ALL"
     state: present
+    host: "{{ wordpress_server_ip }}"
     login_unix_socket: /var/lib/mysql/mysql.sock
