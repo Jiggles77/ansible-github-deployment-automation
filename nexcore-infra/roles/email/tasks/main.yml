@@ -1,0 +1,61 @@
+---
+- name: Install Postfix
+  dnf:
+    name:
+      - postfix
+      - dovecot
+    state: present
+
+- name: Deploy Postfix main.cf template
+  template:
+    src: main.cf.j2
+    dest: /etc/postfix/main.cf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Postfix
+
+- name: Ensure local mailboxes exist for managed users
+  file:
+    path: "/var/spool/mail/{{ item.username }}"
+    state: touch
+    owner: "{{ item.username }}"
+    group: mail
+    mode: '0660'
+  loop: "{{ managed_users }}"
+
+- name: Open firewall SMTP port (25)
+  firewalld:
+    service: smtp
+    permanent: true
+    state: enabled
+  notify: Reload Firewall
+
+- name: Deploy Dovecot configuration
+  template:
+    src: imap.conf.j2
+    dest: /etc/dovecot/conf.d/imap.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Dovecot
+
+- name: Open firewall IMAP port (143)
+  firewalld:
+    service: imap
+    permanent: true
+    state: enabled
+    immediate: true
+  notify: Reload Firewall
+
+- name: Start and Enable Dovecot
+  service:
+    name: dovecot
+    state: started
+    enabled: true
+
+- name: Start and Enable Postfix
+  service:
+    name: postfix
+    state: started
+    enabled: true

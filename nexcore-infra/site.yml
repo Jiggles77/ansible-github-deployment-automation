@@ -59,3 +59,14 @@
   vars_files:
     - group_vars/db.yml
     - group_vars/web.yml
+
+- name: Configure Postfix
+  hosts: mail_server
+  become: true
+  roles:
+    - email
+  tags: deploy_email
+
+
+
+
