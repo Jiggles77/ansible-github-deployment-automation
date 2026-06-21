@@ -16,10 +16,10 @@
     owner: nginx
     group: nginx
 
-- name: Configure LocalSettings.php
-  template:
-    src: LocalSettings.php.j2
-    dest: "{{ wiki_install_dir }}/LocalSettings.php"
+#- name: Configure LocalSettings.php
+#  template:
+#    src: LocalSettings.php.j2
+#    dest: "{{ wiki_install_dir }}/LocalSettings.php"
 
 - name: Create Nginx server configuration for MediaWiki
   template:
