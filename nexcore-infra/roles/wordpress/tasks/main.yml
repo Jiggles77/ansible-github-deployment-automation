@@ -6,6 +6,7 @@
     owner: nginx
     group: nginx
     mode: '0755'
+    setype: httpd_sys_rw_content_t
 
 - name: Download and unpack WordPress packages
   unarchive:
@@ -27,3 +28,8 @@
   template:
     src: wp-config.php.j2
     dest: "{{ wp_install_dir }}/wp-config.php"
+
+- name: Configure php-fpm for Nginx
+  template:
+    src: 99-www.conf.j2
+    dest: /etc/php-fpm.d/99-www.conf

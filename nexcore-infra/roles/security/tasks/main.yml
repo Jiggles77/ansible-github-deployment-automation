@@ -1,3 +1,8 @@
 ---
-- name: Configure Client Security Context
-  import_tasks: security.yml
+- name: Configure Client SE booleans
+  import_tasks: booleans.yml
+  when: inventory_hostname in groups['nfs_clients']
+
+#- name: Configure Client SE Context
+#  import_tasks: context.yml
+#  when: inventory_hostname in groups['web_servers']

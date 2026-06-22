@@ -16,13 +16,18 @@
     owner: nginx
     group: nginx
 
+- name: Create Apache virtual host for wiki
+  template:
+    src: wiki.apache.conf.j2
+    dst: /etc/httpd/conf.d/wiki.conf
+
 #- name: Configure LocalSettings.php
 #  template:
 #    src: LocalSettings.php.j2
 #    dest: "{{ wiki_install_dir }}/LocalSettings.php"
 
-- name: Create Nginx server configuration for MediaWiki
-  template:
-    src: wiki.nginx.conf.j2
-    dest: /etc/nginx/conf.d/wiki.conf
-  notify: Reload Nginx Server
+#- name: Create Nginx server configuration for MediaWiki
+#  template:
+#    src: wiki.nginx.conf.j2
+#    dest: /etc/nginx/conf.d/wiki.conf
+#  notify: Reload Nginx Server

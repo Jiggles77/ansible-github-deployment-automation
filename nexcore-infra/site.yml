@@ -6,6 +6,8 @@
   roles:
     - security
   tags: configure_security
+  vars_files:
+    - group_vars/web.yml
 
 - name: Configure users
   hosts: all_managed

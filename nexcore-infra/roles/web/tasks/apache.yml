@@ -1,0 +1,24 @@
+- name: Install Apache, PHP, and extensions
+  dnf:
+    name:
+      - httpd
+      - php
+      - php-mysqlnd
+      - php-gd
+      - php-xml
+      - php-intl
+      - php-mbstring
+    state: present
+
+- name: Ensure Apache is started and enabled
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: Open port 80 in firewall
+  firewalld:
+    service: http
+    permanent: true
+    state: enabled
+    immediate: true

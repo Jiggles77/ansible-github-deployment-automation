@@ -31,19 +31,11 @@
   loop: "{{ managed_users }}"
   when: item.sudo | bool
 
-- name: Disable SSH Password Authentication
-  copy:
-    dest: "/etc/ssh/sshd_config.d/disable_passwords.conf"
-    content: "PasswordAuthentication no"
+- name: Add extra sshd config
+  template:
+    src: sshd_config.conf.j2
+    dest: "/etc/ssh/sshd_config.d/99-sshd.conf"
     owner: root
     group: root
     mode: '0440'
-
-- name: Enable SSH Pubkey Authentication
-  copy:
-    dest: "/etc/ssh/sshd_config.d/enable_pubkeys.conf"
-    content: "PubkeyAuthentication yes"
-    owner: root
-    group: root
-    mode: '0440'
-  notify: Reload SSHD Daemon
+  notify: Reload SSHD

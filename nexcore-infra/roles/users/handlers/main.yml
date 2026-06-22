@@ -1,5 +1,5 @@
 ---
-- name: Reload SSHD Daemon
+- name: Reload SSHD
   service:
     name: sshd
     state: reloaded
