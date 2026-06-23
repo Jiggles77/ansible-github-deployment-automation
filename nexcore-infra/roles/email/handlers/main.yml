@@ -4,11 +4,6 @@
     name: postfix
     state: restarted
 
-- name: Reload Firewall
-  service:
-    name: firewalld
-    state: reloaded
-
 - name: Restart Dovecot
   service:
     name: dovecot

@@ -1,8 +1,12 @@
 ---
-- name: Import Storage Server configuration blocks
+- name: Configure NFS Share on NFS Server
   import_tasks: server.yml
   when: inventory_hostname in groups['nfs_servers']
 
-- name: Import Storage Client configuration blocks
+- name: Configure NFS Share on Clilents
+  import_tasks: client.yml
+  when: inventory_hostname in groups['nfs_clients']
+
+- name: Configure AutoFS on Clients
   import_tasks: client.yml
   when: inventory_hostname in groups['nfs_clients']

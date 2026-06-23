@@ -1,3 +1,4 @@
+---
 - name: Install Apache, PHP, and extensions
   dnf:
     name:
@@ -15,10 +16,3 @@
     name: httpd
     state: started
     enabled: true
-
-- name: Open port 80 in firewall
-  firewalld:
-    service: http
-    permanent: true
-    state: enabled
-    immediate: true

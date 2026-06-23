@@ -1,7 +1,7 @@
 server {
     listen 80;
     server_name {{ wp_fqdn }};
-    root {{ wp_install_dir }};
+    root /var/www/wordpress;
     index index.php;
 
     location / {
@@ -15,6 +15,6 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
 
-    error_log /var/log/nginx/wp_error.log;
-    access_log /var/log/nginx/wp_access.log;
+    error_log /var/log/nginx/www_error.log;
+    access_log /var/log/nginx/www_access.log;
 }

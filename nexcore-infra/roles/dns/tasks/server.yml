@@ -21,7 +21,7 @@
     state: directory
     mode: '0755'
 
-- name: Create extra zone file
+- name: Create nexcore.local zone file
   template:
     src: nexcore.local.j2
     dest: /etc/named/zones/master/nexcore.local
@@ -34,7 +34,7 @@
   file:
     path: /var/named/zones/master/
     state: directory
-    mode: '0755'
+    mode: '0640'
 
 - name: Create forward lookup zone file for nexcore.local
   template:
@@ -50,10 +50,3 @@
     name: named
     state: started
     enabled: true
-
-- name: Open DNS port in firewall
-  ansible.posix.firewalld:
-    service: dns
-    permanent: true
-    state: enabled
-    immediate: true

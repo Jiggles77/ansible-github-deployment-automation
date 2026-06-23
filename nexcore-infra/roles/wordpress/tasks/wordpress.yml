@@ -1,0 +1,24 @@
+---
+- name: Create deployment directory for WordPress
+  file:
+    path: "{{ wp_install_dir }}"
+    state: directory
+    owner: apache
+    group: apache
+    mode: '0755'
+    setype: httpd_sys_rw_content_t
+
+- name: Download and unpack WordPress packages
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: "{{ wp_install_dir }}"
+    remote_src: true
+    extra_opts: [--strip-components=1]
+    creates: "{{ wp_install_dir }}/index.php"
+    owner: apache
+    group: apache
+
+#- name: Configure wp-config.php
+#  template:
+#    src: wp-config.php.j2
+#    dest: "{{ wp_install_dir }}/wp-config.php"

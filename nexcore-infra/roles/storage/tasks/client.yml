@@ -23,32 +23,3 @@
     fstype: nfs
     opts: rw,sync
     state: mounted
-
-- name: Install AutoFS on clients
-  dnf:
-    name: autofs
-    state: present
-
-- name: Configure AutoFS master mapping rule
-  template:
-    src: company_share.j2
-    dest: /etc/auto.master.d/company_share.master.autofs
-    owner: root
-    group: root
-    mode: '0644'
-  notify: Restart AutoFS
-
-- name: Deploy company_share mapping file
-  template:
-    src: auto.company_share.j2
-    dest: /etc/auto.company_share
-    owner: root
-    group: root
-    mode: '0644'
-  notify: Restart AutoFS
-
-- name: Start and enable AutoFS on clients
-  service:
-    name: autofs
-    state: started
-    enabled: true

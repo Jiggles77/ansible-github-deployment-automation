@@ -1,11 +1,11 @@
 ---
 - name: Remove immutable flag from resolv.conf
-  ansible.builtin.file:
+  file:
     path: /etc/resolv.conf
     attributes: -i
   become: true
 
-- name: Configure /etc/resolv.conf to point to internal DNS server
+- name: Configure /etc/resolv.conf to point to DNS server
   template:
     src: resolv.conf.j2
     dest: /etc/resolv.conf
@@ -15,7 +15,7 @@
   become: true
 
 - name: Re-apply immutable flag
-  ansible.builtin.file:
+  file:
     path: /etc/resolv.conf
     attributes: +i
   become: true

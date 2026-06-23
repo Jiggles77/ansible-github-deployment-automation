@@ -1,0 +1,5 @@
+---
+- name: Create Apache virtual host for wiki
+  template:
+    src: wiki.apache.conf.j2
+    dest: /etc/httpd/conf.d/wiki.conf

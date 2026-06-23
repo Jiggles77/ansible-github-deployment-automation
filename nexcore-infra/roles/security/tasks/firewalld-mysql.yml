@@ -1,0 +1,7 @@
+---
+- name: Allow mysql service port in firewall
+  ansible.posix.firewalld:
+    service: mysql
+    permanent: true
+    state: enabled
+    immediate: true

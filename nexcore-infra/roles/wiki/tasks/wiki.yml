@@ -1,0 +1,22 @@
+---
+- name: Create deployment directory
+  file:
+    path: "{{ wiki_install_dir }}"
+    state: directory
+    owner: apache
+    group: apache
+
+- name: Download and unpack MediaWiki packages
+  unarchive:
+    src: https://releases.wikimedia.org/mediawiki/1.41/mediawiki-1.41.0.tar.gz
+    dest: "{{ wiki_install_dir }}"
+    remote_src: true
+    extra_opts: ["--strip-components=1"]
+    creates: "{{ wiki_install_dir }}/index.php"
+    owner: apache
+    group: apache
+
+#- name: Configure LocalSettings.php
+#  template:
+#    src: LocalSettings.php.j2
+#    dest: "{{ wiki_install_dir }}/LocalSettings.php"

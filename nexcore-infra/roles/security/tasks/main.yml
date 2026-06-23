@@ -1,8 +1,32 @@
 ---
-- name: Configure Client SE booleans
-  import_tasks: booleans.yml
+- name: Configure AutoFS SE booleans
+  import_tasks: booleans-nfs.yml
   when: inventory_hostname in groups['nfs_clients']
 
-#- name: Configure Client SE Context
-#  import_tasks: context.yml
-#  when: inventory_hostname in groups['web_servers']
+- name: Configure MySQL Client SE booleans
+  import_tasks: booleans-mysql.yml
+  when: inventory_hostname in groups['web_servers']
+
+- name: Configure MediaWiki SE Context
+  import_tasks: sefcontext-mediawiki.yml
+  when: inventory_hostname in groups['wiki_server']
+
+- name: Configure Wordpress SE Context
+  import_tasks: sefcontext-wordpress.yml
+  when: inventory_hostname in groups['wp_server']
+
+- name: Configure DNS server Firewall rules
+  import_tasks: firewalld-bind.yml
+  when: inventory_hostname in groups['nfs_servers']
+
+- name: Configure MySQL server Firewall rules
+  import_tasks: firewalld-mysql.yml
+  when: inventory_hostname in groups['db_server']
+
+- name: Configure Postfix and Dovecot Firewall rules
+  import_tasks: firewalld-email.yml
+  when: inventory_hostname in groups['mail_server']
+
+- name: Configure Apache Firewall rules
+  import_tasks: firewalld-apache.yml
+  when: inventory_hostname in groups['web_servers']

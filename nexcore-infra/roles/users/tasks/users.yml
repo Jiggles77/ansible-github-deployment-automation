@@ -5,7 +5,7 @@
     state: present
   loop: "{{ managed_users }}"
 
-- name: Provision employee system user accounts
+- name: Provision managed system user accounts
   user:
     name: "{{ item.username }}"
     groups: "{{ item.groups }}"

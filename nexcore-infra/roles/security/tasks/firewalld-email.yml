@@ -1,0 +1,13 @@
+---
+- name: Open SMTP port in firewall
+  firewalld:
+    service: smtp
+    permanent: true
+    state: enabled
+
+- name: Open IMAP port in firewall
+  firewalld:
+    service: imap
+    permanent: true
+    state: enabled
+    immediate: true

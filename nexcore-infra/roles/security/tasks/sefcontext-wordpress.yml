@@ -1,0 +1,7 @@
+---
+- name: Set httpd_sys_rw_content_t context to wordpress directory
+  community.general.sefcontext:
+    target: "{{ wp_install_dir }}"
+    setype: httpd_sys_rw_content_t
+    state: present
+  notify: Apply Restorecon

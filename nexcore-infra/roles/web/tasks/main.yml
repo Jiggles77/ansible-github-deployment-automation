@@ -1,31 +1,11 @@
 ---
-- name: Install Nginx, PHP-FPM, and PHP extensions
-  dnf:
-    name:
-      - nginx
-      - php-fpm
-      - php-mysqlnd
-      - php-gd
-      - php-xml
-      - php-intl
-      - php-mbstring
-    state: present
+- name: Configure Apache
+  import_tasks: apache.yml
 
-- name: Ensure PHP-FPM service is started and enabled
-  service:
-    name: php-fpm
-    state: started
-    enabled: true
+- name: Configure wiki.nexcore.local virtual host
+  import_tasks: wiki.yml
+  when: inventory_hostname in groups['wiki_server']
 
-- name: Ensure Nginx is started
-  service:
-    name: nginx
-    state: started
-    enabled: true
-
-- name: Open port 80 in firewalld
-  ansible.posix.firewalld:
-    service: http
-    permanent: true
-    state: enabled
-    immediate: true
+- name: Configure www.nexcore.local virtual host
+  import_tasks: wordpress.yml
+  when: inventory_hostname in groups['wp_server']

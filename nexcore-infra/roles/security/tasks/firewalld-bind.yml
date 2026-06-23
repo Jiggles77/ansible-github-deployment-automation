@@ -1,0 +1,7 @@
+---
+- name: Open DNS port in firewall
+  ansible.posix.firewalld:
+    service: dns
+    permanent: true
+    state: enabled
+    immediate: true

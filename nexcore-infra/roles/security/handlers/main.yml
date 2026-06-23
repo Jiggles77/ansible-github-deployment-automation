@@ -1,4 +1,4 @@
 - name: Apply Restorecon
   command:
-    cmd: "restorecon -Rv /var/www"
+    cmd: "restorecon -R /var/www"
   become: true

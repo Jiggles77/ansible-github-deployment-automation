@@ -1,7 +1,6 @@
 ---
 - name: Reload NFS Exports Table
   command: exportfs -ra
-  changed_when: true
 
 - name: Restart AutoFS
   service:
