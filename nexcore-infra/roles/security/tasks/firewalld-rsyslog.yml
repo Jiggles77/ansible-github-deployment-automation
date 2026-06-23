@@ -1,0 +1,7 @@
+---
+- name: Open TCP port 514 in firewall
+  ansible.posix.firewalld:
+    port: 514/tcp
+    permanent: true
+    state: enabled
+    immediate: true

@@ -1,0 +1,6 @@
+---
+- name: Configure clients to send logs to central log server
+  template:
+    src: client.conf.j2
+    dest: /etc/rsyslog.d/client.conf
+  notify: Restart Rsyslog

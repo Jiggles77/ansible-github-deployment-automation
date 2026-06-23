@@ -69,6 +69,9 @@
     - email
   tags: deploy_email
 
-
-
-
+- name: Configure Logging
+  hosts: logging
+  become: true
+  roles:
+    - logging
+  tags: configure_logging

@@ -1,0 +1,8 @@
+---
+- name: Make sure custom log directory exists on servers
+  file:
+    path: /var/log/remote
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'

@@ -48,3 +48,7 @@ managed_users:
   - username: "mkt01"
     groups: "marketing"
     sudo: false
+
+## Logging
+
+log_server: "{{ hostvars[groups['log_server'][0]]['ansible_host'] }}"

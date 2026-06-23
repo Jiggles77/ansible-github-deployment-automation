@@ -1,0 +1,12 @@
+---
+- name: Configure log Directory for centralized logging
+  import_tasks: directory.yml
+  when: inventory_hostname in groups['logging']
+
+- name: Configure log server for Centralized Logging
+  import_tasks: server.yml
+  when: inventory_hostname in groups['log_server']
+
+- name: Configure log clients for Centralized Logging
+  import_tasks: clients.yml
+  when: inventory_hostname in groups['log_clients']

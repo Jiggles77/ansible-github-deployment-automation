@@ -30,3 +30,7 @@
 - name: Configure Apache Firewall rules
   import_tasks: firewalld-apache.yml
   when: inventory_hostname in groups['web_servers']
+
+- name: Configure rsyslog Firewall rules
+  import_tasks: firewalld-rsyslog.yml
+  when: inventory_hostname in groups['log_server']
