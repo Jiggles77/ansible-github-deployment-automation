@@ -34,3 +34,7 @@
 - name: Configure rsyslog Firewall rules
   import_tasks: firewalld-rsyslog.yml
   when: inventory_hostname in groups['log_server']
+
+- name: Configure rsyslog SE Ports rule
+  import_tasks: seports-rsyslog.yml
+  when: inventory_hostname in groups['log_server']

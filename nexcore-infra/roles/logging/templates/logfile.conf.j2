@@ -1,0 +1,4 @@
+{% for host in groups['log_clients'] %}
+:hostname, contains, "{{ host }}" /var/log/remote/{{ host }}.log
+{% endfor %}
+& stop

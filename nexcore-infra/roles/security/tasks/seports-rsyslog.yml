@@ -1,0 +1,7 @@
+---
+  - name: Allow rsyslog to listen on tcp port 514
+    community.general.seport:
+      ports: 514
+      proto: tcp
+      setype: syslogd_port_t
+      state: present

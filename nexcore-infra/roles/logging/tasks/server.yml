@@ -2,7 +2,16 @@
 - name: Configure Rsyslog on central logging server to listen for client logs 
   template:
     src: imtcp.conf.j2
-    dest: /etc/rsyslog.d/imtcp.conf
+    dest: /etc/rsyslog.d/00-imtcp.conf
+    owner: root
+    group: root
+    mode: '0755'
+  notify: Restart Rsyslog
+
+- name: Configure Rsyslog on central logging server to save logs client specific files
+  template:
+    src: logfile.conf.j2
+    dest: /etc/rsyslog.d/01-logfile.conf
     owner: root
     group: root
     mode: '0755'
