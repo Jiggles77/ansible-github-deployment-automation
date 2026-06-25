@@ -1,0 +1,3 @@
+---
+- name: Configure Package Upgrade and Cleanup
+  import_tasks: dnf.yml

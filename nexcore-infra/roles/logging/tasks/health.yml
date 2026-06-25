@@ -1,0 +1,30 @@
+---
+- name: Create Healthchecks Directory
+  file:
+    path: /var/log/healthchecks
+    owner: root
+    group: root
+    state: directory
+
+- name: Configure Healthcheck for Hostname, Uptime, and Disk Usage
+  template:
+    src: healthcheck.sh.j2
+    dest: /var/log/healthchecks/healthcheck.sh
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Schedule Daily Health Check with CRON
+  cron:
+    name: "Daily maintenance health check"
+    minute: "0"
+    hour: "3"
+    job: "/var/log/healthchecks/healthcheck.sh"
+
+- name: Configure Log Rotation for nexcore-health.log
+  template:
+    src: logrotate.conf.j2
+    dest: /etc/logrotate.d/nexcore-health
+    owner: root
+    group: root
+    mode: '0644'

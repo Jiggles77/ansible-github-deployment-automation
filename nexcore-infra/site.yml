@@ -70,8 +70,15 @@
   tags: deploy_email
 
 - name: Configure Logging
-  hosts: logging
+  hosts: all_managed
   become: true
   roles:
     - logging
   tags: configure_logging
+
+- name: Configure Patching
+  hosts: all_managed
+  become: true
+  roles:
+    - patching
+  tags: configure_patching

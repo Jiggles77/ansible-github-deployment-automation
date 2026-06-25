@@ -1,0 +1,15 @@
+---
+- name: Configure Package Upgrade and Cache Cleanup Script
+  template:
+    src: dnf.sh.j2
+    dest: /var/log/healthchecks/dnf.sh
+    owner: root
+    group: root
+
+- name: Schedule Weekly Package Cache Cleanup with CRON
+  cron:
+    name: "Daily Package Upgrade"
+    minute: "0"
+    hour: "4"
+    weekday: "7"
+    job: "/var/log/healthchecks/dnf.sh"

@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Healthcheck for Hostname: $(hostname) " >> /var/log/nexcore-health.log
+echo "Disk Usage: $(df -h | grep /dev/vda4 | awk '{print $5}') Uptime:  $(uptime | awk '{print $1}')" >> /var/log/nexcore-health.log
+echo "" >> /var/log/nexcore-health.log

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+REBOOT_REQUIRED=false
+
+dnf update
+dnf upgrade -y
+dnf clean all
+
+if [ -f /var/run/reboot-required ]; then
+    REBOOT_REQUIRED=true
+fi
+
+if [ "$REBOOT_REQUIRED" = true ]; then
+    echo "Reboot required" >> /var/log/nexcore-health.log
+    reboot
+else
+    echo "No reboot required" >> /var/log/nexcore-health.log
+fi

@@ -10,3 +10,6 @@
 - name: Configure log clients for Centralized Logging
   import_tasks: clients.yml
   when: inventory_hostname in groups['log_clients']
+
+- name: Configure Daily Healthcheck Script and Log Rotation
+  import_tasks: health.yml
