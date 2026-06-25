@@ -2,7 +2,7 @@
 
 ## Project
 
-project_directory: "/home/student/project-automation/nexcore-infra"
+project_directory: "/home/student/ansible-github-deployment-automation/nexcore-infra"
 domain_name: "nexcore.local"
 network_subnet: "172.25.250.0/24"
 

@@ -15,6 +15,7 @@
     creates: "{{ wiki_install_dir }}/index.php"
     owner: apache
     group: apache
+  notify: Apply Restorecon
 
 #- name: Configure LocalSettings.php
 #  template:

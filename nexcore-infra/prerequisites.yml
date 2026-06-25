@@ -1,0 +1,17 @@
+---
+- name: Patch Ansible on Localhost
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: Upgrade Ansible with pip
+    pip:
+      name: ansible
+      state: latest
+      executable: pip3
+
+  - name: Install ansible.posix and ansible.mysql
+    command:
+      cmd: "ansible-galaxy collection install {{ item }} --upgrade"
+    loop:
+      - ansible.posix 
+      - ansible.mysql

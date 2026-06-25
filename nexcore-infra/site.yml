@@ -1,9 +1,10 @@
 ---
-- name: Patch Ansible on Localhost
-  pip:
-    name: ansible
-    state: latest
-    executable: pip3
+- name: Configure users
+  hosts: all_managed
+  become: true
+  roles:
+    - users
+  tags: configure_users
 
 - name: Configure security
   hosts: all_managed
@@ -14,13 +15,6 @@
   vars_files:
     - group_vars/web.yml
 
-- name: Configure users
-  hosts: all_managed
-  become: true
-  roles:
-    - users
-  tags: configure_users
-
 - name: Deploy MySQL Database
   hosts: db_server
   become: true
@@ -30,7 +24,7 @@
   vars_files:
 #    - group_vars/all.yml
     - group_vars/db.yml
-    
+
 - name: Configure BIND on DNS server and resolv.conf on clients
   hosts: all_managed
   become: true
