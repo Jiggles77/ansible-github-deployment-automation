@@ -1,4 +1,9 @@
 ---
+- name: Patch Ansible on Localhost
+  pip:
+    name: ansible
+    state: latest
+    executable: pip3
 
 - name: Configure security
   hosts: all_managed
