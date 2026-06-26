@@ -4,6 +4,7 @@
     service: smtp
     permanent: true
     state: enabled
+  notify: Reload Firewalld
 
 - name: Open IMAP port in firewall
   firewalld:
@@ -11,3 +12,4 @@
     permanent: true
     state: enabled
     immediate: true
+  notify: Reload Firewalld

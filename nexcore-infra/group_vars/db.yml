@@ -8,3 +8,7 @@ wiki_db_password: "Med1aW1k12027!"
 wp_db_name: "wordpressdb"
 wp_db_user: "wpuser"
 wp_db_password: "WordPre551999#"
+
+## Backups
+backup_db_user: "backup"
+backup_user_password: "BackupGuy1678!?"

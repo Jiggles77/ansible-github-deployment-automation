@@ -52,3 +52,7 @@ managed_users:
 ## Logging
 
 log_server: "{{ hostvars[groups['log_server'][0]]['ansible_host'] }}"
+
+## Backups
+
+backup_dir: /var/backups/nexcore/

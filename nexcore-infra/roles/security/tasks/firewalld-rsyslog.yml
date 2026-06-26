@@ -5,3 +5,4 @@
     permanent: true
     state: enabled
     immediate: true
+  notify: Reload Firewalld

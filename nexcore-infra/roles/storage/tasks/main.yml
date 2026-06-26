@@ -8,5 +8,5 @@
   when: inventory_hostname in groups['nfs_clients']
 
 - name: Configure AutoFS on Clients
-  import_tasks: client.yml
+  import_tasks: autofs.yml
   when: inventory_hostname in groups['nfs_clients']

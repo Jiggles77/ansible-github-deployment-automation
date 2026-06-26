@@ -81,3 +81,12 @@
   roles:
     - patching
   tags: configure_patching
+
+- name: Configure Backups
+  hosts: all_managed
+  become: true
+  roles: 
+    - backup
+  tags: configure_backups
+  vars_files:
+    - group_vars/db.yml

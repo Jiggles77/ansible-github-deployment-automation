@@ -5,3 +5,4 @@
 
 - name: Configure DNS on clients
   import_tasks: clients.yml
+  when: inventory_hostname in groups['dns_clients']

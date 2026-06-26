@@ -1,0 +1,4 @@
+---
+- name: Configure Automated Backups
+  import_tasks: backup.yml
+  when: inventory_hostname in groups['db_server']
