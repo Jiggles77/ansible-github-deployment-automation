@@ -20,10 +20,10 @@
   become: true
   roles:
     - database
-  tags: deploy_mysql
   vars_files:
 #    - group_vars/all.yml
     - group_vars/db.yml
+  tags: deploy_mysql
 
 - name: Configure BIND on DNS server and resolv.conf on clients
   hosts: all_managed
@@ -56,10 +56,10 @@
   roles:
     - web
     - wordpress
-  tags: deploy_wp
   vars_files:
     - group_vars/db.yml
     - group_vars/web.yml
+  tags: deploy_wp
 
 - name: Configure Postfix
   hosts: mail_server

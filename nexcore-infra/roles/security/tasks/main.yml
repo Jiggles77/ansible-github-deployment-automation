@@ -17,7 +17,7 @@
 
 - name: Configure DNS server Firewall rules
   import_tasks: firewalld-bind.yml
-  when: inventory_hostname in groups['nfs_servers']
+  when: inventory_hostname in groups['dns_server']
 
 - name: Configure MySQL server Firewall rules
   import_tasks: firewalld-mysql.yml
