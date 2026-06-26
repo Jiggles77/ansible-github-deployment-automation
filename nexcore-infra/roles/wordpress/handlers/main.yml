@@ -2,3 +2,8 @@
   command:
     cmd: "restorecon -R /var/"
   become: true
+
+- name: Reload Apache
+  service:
+    name: httpd
+    state: reloaded

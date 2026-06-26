@@ -1,8 +1,8 @@
 <VirtualHost *:80>
-    ServerName wiki.nexcore.local
-    DocumentRoot /var/www/mediawiki
+    ServerName wiki.{{ domain_name }}
+    DocumentRoot {{ wiki_install_dir }}
     
-    <Directory /var/www/mediawiki>
+    <Directory {{ wiki_install_dir }}>
         AllowOverride All
         Require all granted
     </Directory>

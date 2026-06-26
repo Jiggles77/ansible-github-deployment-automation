@@ -17,7 +17,9 @@
     creates: "{{ wp_install_dir }}/index.php"
     owner: apache
     group: apache
-  notify: Apply Restorecon
+  notify:
+    - Apply Restorecon
+    - Reload Apache
 
 #- name: Configure wp-config.php
 #  template:
